@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+int *push(int *, int *);
+void display(int *, int *);
+int *pop(int *, int *);
+int main()
+{
+	int ar[10], *top, n;
+	printf("\n MAXIMUM 10 ELEMENT IS ALLOWED");
+	top = NULL;
+	while (1)
+	{
+		printf("\n 1. PUSH");
+		printf("\n 2. POP");
+		printf("\n 3. Exit");
+		scanf("%d", &n);
+		if (n == 1)
+			top = push(ar, top);
+		else if (n == 2)
+			top == pop(ar, top);
+		else
+			exit(0);
+	}
+	return 0;
+}
+int *push(int *ar1, int *top)
+{
+	int i;
+	printf("\n Enter the number you want to push");
+	scanf("%d", &i);
+	if (top == NULL)
+	{
+		top = &ar1[0];
+		*top = i;
+	}
+	else
+	{
+		if (top == &ar1[9])
+		{
+			printf("\n OVERFLOW");
+		}
+		else
+		{
+			top++;
+			*top = i;
+		}
+	}
+	display(ar1, top);
+	return top;
+}
+
+int *pop(int *ar1, int *top)
+{
+	top--;
+
+	display(ar1, top);
+	return top;
+}
+
+void display(int *ar2, int *top)
+{
+	int *i;
+	for (i = top; i >= ar2; i--)
+		printf("\n %d", *i);
+}
