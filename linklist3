@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct test
+{
+	int *front,*rear;
+};
+
+void display(int *ar2,struct test dsa)
+{
+	int *i;
+	for(i=dsa.front;i<=dsa.rear;i++)
+		printf("\n %d",*i);
+}
+
+struct test QinsertFrnt(int *,struct test);
+struct test QinsertRear(int *,struct test);
+struct test QdeleteFrnt(int *, struct test);
+struct test QdeleteRear(int *, struct test);
+
+int main()
+{
+	int ar[10],n;
+	struct test dsa;
+	printf("\n AT MAX 10 ELEMENT IS ALLOWED");
+	dsa.front=NULL;
+	dsa.rear=NULL;
+	while(1)
+	{
+		printf("\n 1. QUEUE INSERT USING FRONT");
+		printf("\n 2. QUEUE INSERT USING REAR");
+		printf("\n 3. QUEUE DELETE USING FRONT");
+		printf("\n 4. QUEUE DELETE USING REAR");
+		printf("\n 5. EXIT\n");
+		scanf("\n%d",&n);
+		if(n==1)
+			dsa=QinsertFrnt(ar,dsa);
+		else if(n==2)
+			dsa=QinsertRear(ar,dsa);
+		else if(n==3)
+			dsa=QdeleteFrnt(ar,dsa);
+		else if(n==4)
+			dsa=QdeleteRear(ar,dsa);		
+		else
+			exit(0);
+	}
+	return 0;
+}
+struct test QinsertFrnt(int *ar1, struct test dsa)
+{
+	int i;				
+	printf("\n enter the data you want to insert");
+	scanf("%d",&i);
+	if(dsa.front==NULL& dsa.rear==NULL)
+	{
+		dsa.front=&ar1[0];
+		*dsa.front=i;
+		dsa.rear=dsa.front;
+	}
+	else
+	{
+		if(dsa.front==&ar1[0])
+		{
+			printf("\n OVERFLOW");
+		}
+		else
+		{
+			dsa.front--;
+			*dsa.front=i;
+		}
+	}
+	display(ar1,dsa);
+	return dsa;
+}
+
+struct test QinsertRear(int *ar1, struct test dsa)
+{
+	int i;
+	printf("\n enter the data you want to insert");
+	scanf("%d",&i);
+	if(dsa.front==NULL& dsa.rear==NULL)
+	{
+		dsa.rear=&ar1[0];
+		*dsa.rear=i;
+		dsa.front=dsa.rear;
+	}
+	else
+	{
+		if(dsa.rear==&ar1[9])
+		{
+			printf("\n OVERFLOW");
+		}
+		else
+		{
+			dsa.rear++;
+			*dsa.rear=i;
+		}
+	}
+	display(ar1,dsa);
+	return dsa;
+}
+
+struct test QdeleteFrnt(int *ar1, struct test DSA)
+{
+	if (DSA.front == NULL || DSA.front == &ar1[-1])
+		printf("\n\nQUEUE UNDERFLOW !!!");
+	else if (DSA.front == DSA.rear)
+		DSA.front = DSA.rear = &ar1[-1];
+	else
+	
+		DSA.front++;
+	if (DSA.front == NULL || DSA.front == &ar1[-1])
+		printf("\nNo elements present in the QUEUE.\n");
+	else
+		display(ar1, DSA);
+	return DSA;
+
+}
+
+
+struct test QdeleteRear(int *a3, struct test dsa)
+{
+	if(dsa.front == NULL & dsa.rear == NULL)
+		printf("\n Queue Underflow");
+
+	else
+	{
+		if(dsa.front == dsa.rear)
+		{
+			dsa.front=dsa.rear=NULL;			
+		}
+		else
+		{
+			dsa.rear=dsa.rear-1;
+			display(a3,dsa);
+
+		}	
+	}
+	return dsa;
+}
