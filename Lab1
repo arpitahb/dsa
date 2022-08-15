@@ -1,0 +1,74 @@
+#include "iostream"
+/*Define a class in C++ to represent a bank account. Include the following data members:
+1. Name of the depositor
+2. Account number
+3. Type of account
+4. Balance amount in the account
+Member functions:
+1. To assign initial values
+2. To deposit an amount
+3. To withdraw an amount after checking the balance
+4. To display name and balance
+Write a main program to test the classes. Modify the program for handling 10 customers. */
+
+using namespace std;
+class Bankaccount{
+char name[50];
+int account_number;
+char account_type[50];
+int balance;
+public:
+    void initialise(){
+    cout<<"\nEnter Account Holders Name:";
+    gets(name);
+    cout<<"\nEnter Account type:";
+    gets(account_type);
+    cout<<"\nEnter account number:";
+    cin>>account_number;
+    cout<<"\nEnter balance to deposit:";
+    cin>>balance;}
+
+    void deposit(){
+        int x;
+        cout <<"Enter the amount to be deposited";
+        cin>>x;
+        balance+=x;
+        cout<<"Your new balance is:" << balance;
+    }
+    void withdraw(){
+        int x;
+        cout<<"Your Balance is:" << balance;
+        cout<<"Enter the amount to be withdraw:";
+        cin>>x;
+        balance-=x;
+
+
+    }
+    void display(){
+        cout<<"\nName:";
+        gets(name);
+        cout<<"\nBalance:"<< balance;
+
+    }
+};
+int main()
+{
+    int i,a;
+    Bankaccount b1[10];
+    for(a=0;a<=9;a++){
+    b1[10].initialise();
+    }
+    cout<<"\n1.INFO /n2.DEPSOT/n3.WITHDRAW";
+    cin>>i;
+    if(i==1){
+        b1[10].display();
+    }
+    if(i==2){
+        b1[10].deposit();
+    }
+    if(i==3){
+        b1[10].withdraw();
+    }
+
+    return 0;
+}
