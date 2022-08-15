@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct test Qinsert(int *,struct test);
+void display(int *, struct test);
+struct test Qdelete(int *,struct test);
+struct test
+{
+	int *front,*rear;
+};
+int main()
+{
+	int ar[10],n;
+	struct test dsa;
+	printf("\n AT MAX 10 ELEMENT IS ALLOWED");
+	dsa.front=NULL;
+	dsa.rear=NULL;
+	while(1)
+	{
+		printf("\n 1. QUEUE INSERT");
+		printf("\n 2. QUEUE DELETE");
+		printf("\n 3. EXIT");
+		scanf("%d",&n);
+		if(n==1)
+			dsa=Qinsert(ar,dsa);
+		else if(n==2)
+			dsa=Qdelete(ar,dsa);
+		else
+			exit(0);
+	}
+	return 0;
+}
+struct test Qinsert(int *ar1, struct test dsa)
+{
+	int i;
+	printf("\n enter the data you want to insert");
+	scanf("%d",&i);
+	if(dsa.front==NULL& dsa.rear==NULL)
+	{
+		dsa.rear=&ar1[0];
+		*dsa.rear=i;
+		dsa.front=dsa.rear;
+	}
+	else
+	{
+		if(dsa.rear==&ar1[9])
+		{
+			printf("\n OVERFLOW");
+		}
+		else
+		{
+			dsa.rear++;
+			*dsa.rear=i;
+		}
+	}
+	display(ar1,dsa);
+	return dsa;
+}
+struct test Qdelete(int *ar1,struct test dsa)
+{
+	int i;
+	if(dsa.front==NULL & dsa.rear==NULL)
+	{
+		printf("\n\n UNDERFLOW");
+	}
+	else
+	{
+		if(dsa.front==dsa.rear)
+		{
+			dsa.front=NULL;
+			dsa.rear=NULL;
+			printf("\n");
+		}
+		else
+		{
+			dsa.front++;
+			display(ar1,dsa);
+		}
+		
+	}
+
+	return dsa;
+}
+void display(int *ar2,struct test dsa)
+{
+	int *i;
+	for(i=dsa.front;i<=dsa.rear;i++)
+		printf("\n %d",*i);
+}
