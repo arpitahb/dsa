@@ -1,0 +1,130 @@
+#include<stdio.h>
+#include<stdlib.h>
+//DSA assignment
+// Arpita Hatibaruah
+// Roll no. 200610002016
+void Insert();
+void Delete();
+void display();
+void Revdisplay();
+struct node
+{
+	int info;
+	struct node *next;
+};
+struct node *start;
+struct node *test,*test1;
+int main()
+{
+	int n;
+	while(1)
+	{
+		printf("\n 1.Insert");
+		printf("\n 2.Delete");
+		printf("\n 3.Revdisplay");
+		printf("\n 4.Exit");
+		scanf("%d",&n);
+		if(n==1)
+			Insert();
+		else if(n==2)
+			Delete();
+		else if(n==3)
+			Revdisplay();
+		else
+			exit(0);
+	}
+	return 0;
+}
+
+void Insert()
+{
+	int i;
+
+	test=malloc(sizeof(struct node));
+	printf("\n enter the data");
+	scanf("%d",&i);
+	test->info=i;
+	test->next=NULL;
+	if(start==NULL)
+	{
+		start=test;
+	}
+	else
+	{
+		test1=start;
+		while(test1->next!=NULL)
+		{
+			test1=test1->next;
+		}
+		test1->next=test;
+	}
+	display();
+}
+
+
+
+void Revdisplay()
+{
+	struct node *test,*test1,*new,*new1;
+	new=start;
+	while(new->next!=NULL)
+	{
+		new=new->next;
+	}
+	while(new!=start)
+	{
+		test=new;
+		printf("\n %d",test->info);
+		test1=start;
+		while(test1->next!=test)
+		{
+			test1=test1->next;
+		}
+		test1->next=new;
+		new=test1;
+	}
+	printf("\n %d",start->info);
+}
+
+
+void Delete()
+{
+ struct node *next;
+	if(start==NULL)
+	{
+		printf("underflow");
+	}
+
+		else if( start-> next == NULL)
+        {
+            start = NULL;
+            free(start);
+
+        }
+
+
+        else
+        {
+            test = start;
+            while(test->next != NULL)
+                {
+                    test1 = test;
+                    test = test ->next;
+                }
+                test1->next = NULL;
+                free(test);
+
+            }
+            display();
+        }
+	void display()
+{
+	struct node *test;
+	test=start;
+	while(test!=NULL)
+	{
+		printf("\n %d",test->info);
+		test=test->next;
+	}
+
+}
